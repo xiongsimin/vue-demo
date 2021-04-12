@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!--事件中直接写js片段-->
+        <button v-on:click="num++">点赞</button>
+        <!--事件指定一个回调函数，必须是Vue实例中定义的函数-->
+        <button v-on:click="cancel">取消</button>
+
+        <h1>有{{num}}个赞</h1>
+
+
+        <!-- Vue为“v-on”提供了事件修饰符。修饰符是由.开头的指令后缀来表示的 -->
+        <!-- `.stop`：阻止事件冒泡到父元素 -->
+        <!-- `.prevent`：阻止默认事件发生 -->
+        <!-- `.capture`：使用事件捕获模式 -->
+        <!-- `.self`：只有元素自身触发事件才执行（冒泡或捕获的都不执行） -->
+        <!-- `.once`：只执行一次 -->
+        <div style="border: 1px red solid;" v-on:click.once="hello">
+            大div
+            <div style="border: 1px black solid;margin: 3px;" v-on:click.stop="hello">
+                小div
+                <a href="http://baidu.com" @click.prevent.stop="hello">跳转到百度</a>
+            </div>
+        </div>
+
+        <!-- 按键修饰符 -->
+        <!-- keyCode比较难记 -->
+        <!-- 常用按键 -->
+        <!-- `.enter` -->
+        <!-- `.tab` -->
+        <!-- `.delete`（删除和退格） -->
+        <!-- `.esc` -->
+        <!-- `.space` -->
+        <!-- `.up` -->
+        <!-- `.down` -->
+        <!-- `.left` -->
+        <!-- `.right` -->
+        <input type="text" @keyup.up="num++" v-model="num"/>
+        <!-- 组合键 -->
+        <!-- `.ctrl` -->
+        <!-- `.alt` -->
+        <!-- `.shift` -->
+        <input type="text" @keyup.ctrl.up="num+=2" v-model="num"/>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                num: 1
+            },
+            methods: {
+                cancel() {
+                    this.num--;
+                },
+                hello() {
+                    alert("hello");
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
