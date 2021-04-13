@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <!-- 推荐遍历时加上:key -->
+            <li v-for="(user,index) in users" :key="index" v-if ="user.gender=='男'">
+                <!-- v-for="item in items" -->
+                <!-- v-for="(item,index) in items" -->
+                当前行：{{index}} ==> {{user.name}} ===> {{user.gender}} ===> {{user.age}} <br />
+                <!-- v-for="value in object" -->
+                <!-- v-for="(value,key) in object" -->
+                <!-- v-for="(value,key,index) in object" -->
+                对象信息:
+                <span v-for="(v,k,i) in user" :key="i">
+                    {{k}} ==> {{v}} ==> {{i}}
+                </span>
+            </li>
+        </ul>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                users: [
+                    {
+                        name: "胡歌", gender: "男", age: 40
+                    }, {
+                        name: "杨幂", gender: "女", age: 40
+                    }, {
+                        name: "林俊杰", gender: "男", age: 41
+                    }, {
+                        name: "陈奕迅", gender: "男", age: 42
+                    }, {
+                        name: "孙燕姿", gender: "女", age: 31
+                    }]
+            }
+        });
+    </script>
+</body>
+
+</html>
